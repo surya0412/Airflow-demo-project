@@ -16,6 +16,9 @@ default_args = {
 def some():
     return "Hello this is my dag with python operator"
 
+def some2():
+    return "Hello this is my dag with python operator"
+
 def some1():
     return "Hello this is my dag with python operator"
 
@@ -30,9 +33,14 @@ with DAG("mydag", start_date=datetime(2022, 1 ,1),
         python_callable=some
     )
 
-    T4 = PythonOperator(
-        task_id="T4",
-        python_callable=some
+    # T2 = PythonOperator(
+    #     task_id="T2",
+    #     python_callable=some1
+    # )
+
+    T3 = PythonOperator(
+        task_id="T3",
+        python_callable=some2
     )
 
     subdag = SubDagOperator(
@@ -40,6 +48,6 @@ with DAG("mydag", start_date=datetime(2022, 1 ,1),
         subdag=subdagfunction(dag.dag_id,"subdag",args)
     )
 
-    T1 >> subdag
+    T1 >> T3 >> subdag
 
 
