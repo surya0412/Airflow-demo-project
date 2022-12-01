@@ -25,10 +25,10 @@ with DAG("mydag", start_date=datetime(2022, 1 ,1),
     args = {
         'start_date': dag.start_date, 'schedule_interval': dag.schedule_interval, 'catchup': dag.catchup
     }
-    # T1 = PythonOperator(
-    #     task_id="T1",
-    #     python_callable=some
-    # )
+    T1 = PythonOperator(
+        task_id="T1",
+        python_callable=some
+    )
 
     # T2 = PythonOperator(
     #     task_id="T2",
@@ -38,5 +38,7 @@ with DAG("mydag", start_date=datetime(2022, 1 ,1),
         task_id="subdag",
         subdag=subdagfunction(dag.dag_id,"subdag",args)
     )
+
+    T1 >> subdag
 
 
