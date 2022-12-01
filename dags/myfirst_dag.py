@@ -32,6 +32,10 @@ with DAG("mydag", start_date=datetime(2022, 1 ,1),
         task_id="T1",
         python_callable=some
     )
+    T2 = PythonOperator(
+        task_id="T2",
+        python_callable=some1
+    )
 
     # T2 = PythonOperator(
     #     task_id="T2",
